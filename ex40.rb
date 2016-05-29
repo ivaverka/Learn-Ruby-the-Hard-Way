@@ -8,6 +8,13 @@ class Song
 		@lyrics.each {|line| puts line}
 	end
 
+	# turn each line into a key number/integer
+	def sing_hash()
+		@lyrics.each do |key|
+			puts "#{key} = #{key.hash}"
+		end
+	end
+
 end
 
 happy_bday = Song.new(["Happy birthday to you",
@@ -35,6 +42,8 @@ sonet_12 = ["When I do count the clock that tells the time,",
 shakespear = Song.new(sonet_12)
 
 shakespear.sing_me_a_song()
+
+shakespear.sing_hash()
 
 happy_bday.sing_me_a_song()
 
