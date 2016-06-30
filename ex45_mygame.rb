@@ -1,3 +1,5 @@
+require "./questions.rb"
+
 class Scene
 	def enter()
 		puts "This class is empty."
@@ -42,22 +44,32 @@ class Death < Scene
 end
 
 class CentralCorridor < Scene
+	include Questions
 
 	def enter()
 		puts "Welcome to Central Corridor"
-		puts "here is a Ruby question:"
-		puts "What is a variable?"
-		puts ">> "
+		# puts "IGNORE: here is a Ruby question:"
+		# puts "IGNORE: What is a variable?"
+		#Questions.next_question(Questions) do |key|
+			#puts "Now answer this: #{key}"
+		#end
+			
 
-		answer = $stdin.gets.chomp
+		Questions.next_question(@@questions) # should I add a while/for loop here so it iterates over the hash?
+		# OR Should I include Questions in the Scene class and use Super in other classes and override to go to the next scene?
 
-		if answer == "a name for something"
-			puts "This answer is right"
-			return 'wooden'
-		else
-			puts "The answer is wrong"
-			return 'death'
-		end
+	
+		# puts ">> "
+
+		#answer = $stdin.gets.chomp # I am going to use answer from the Questions Module
+
+		#if Questions::answer == "a name for something" # it is not working after I added Questions:: (working version: answer == "a name for something"). I THINK I NEED TO PUT THE IF STATEMENT in The module where the input will be verified.
+			#puts "This answer is right"
+			#return 'wooden'
+		#else
+			#puts "The answer is wrong"
+			#return 'death'
+		#end
 	end
 end
 
