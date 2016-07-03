@@ -1,4 +1,4 @@
-require "./questions.rb"
+#require "./questions.rb"
 
 class Scene
 	def enter()
@@ -27,6 +27,9 @@ def play()
 	end
 end
 
+
+
+
 class Code
 	def easy_question
 	end
@@ -44,18 +47,57 @@ class Death < Scene
 end
 
 class CentralCorridor < Scene
-	include Questions
+	#include Questions
+
+	# I don't have to include all the questions because I don't want the answered questions to be displayed again
+	# But if I want a random question to be returned, then I need to have a few.
+	# I do think I need to put the questions in a module: maybe create a function that will  have a hash inside?
+	
+	
 
 	def enter()
 		puts "Welcome to Central Corridor"
-		# puts "IGNORE: here is a Ruby question:"
-		# puts "IGNORE: What is a variable?"
+
+		question = {
+		'what is a variable?' => 'a', #name for something,
+		'what is an array?' => 'b', #collection of something',
+	}
+		
+		items = question.keys
+		
+
+		question.each_key do |key|
+			puts items[rand(items.size)]
+			#puts "Answer this question: #{key} >> "
+			answer = $stdin.gets.chomp
+			
+
+
+			if answer == question[key]
+				puts "This answer is right"
+				return 'wooden'
+			else
+				puts "Wrong"
+				return 'death'
+			end
+		end
+
+		# TRYING RANDOM
+
+		#random_question = rand(@@question.size[key]) #???
+
+
+
+		#def Questions.next_question(question_name)
+	
 		#Questions.next_question(Questions) do |key|
 			#puts "Now answer this: #{key}"
 		#end
-			
+		
+		#puts Questions.ask_question()
+		
 
-		Questions.next_question(@@questions) # should I add a while/for loop here so it iterates over the hash?
+		# Questions.next_question@@questions) # should I add a while/for loop here so it iterates over the hash?
 		# OR Should I include Questions in the Scene class and use Super in other classes and override to go to the next scene?
 
 	
@@ -75,21 +117,51 @@ end
 
 
 class Wooden < Scene
+	#include Questions
+
+	@@question = {'what is an array>' => 'a collection of something',
+			'what is a variable' => 'a name for something',
+		}
 
 	def enter()
-		puts "You made it to the Wooden room. Welcome."
-		puts "Are you sure you know Ruby?"
-		puts "What is an array?"
-		puts ">> "
+		puts "Welcome to the Wooden Room."
 
-		answer = $stdin.gets.chomp
 
-		if answer == "a collection of something"
-			puts "That's right. Good job"
+		items = @@question.keys
+
+
+		@@question.each_key do |key|
+			puts items[rand(items.length)]
+			answer = $stdin.gets.chomp
+
+			if answer == @@question[key]
+			puts "Great! You can go to the next room."
+			return 'central_corridor'
 		else
-			puts "Oh, no."
+			puts "You need to study more!"
 			return 'death'
 		end
+		end
+		
+
+			
+
+
+
+		
+		# puts "You made it to the Wooden room. Welcome."
+		# puts "Are you sure you know Ruby?"
+		# puts "What is an array?"
+		# puts ">> "
+
+		# answer = $stdin.gets.chomp
+
+		# if answer == "a collection of something"
+			# puts "That's right. Good job"
+		# else
+			# puts "Oh, no."
+			# return 'death'
+		# end
 	end
 end
 
