@@ -136,17 +136,13 @@ class Wooden < Scene
 
 			if answer == @@question[key]
 			puts "Great! You can go to the next room."
-			return 'central_corridor'
+			return 'silver'
 		else
 			puts "You need to study more!"
 			return 'death'
 		end
 		end
 		
-
-			
-
-
 
 		
 		# puts "You made it to the Wooden room. Welcome."
@@ -170,6 +166,33 @@ class Silver < Scene
 
 	def enter()
 		puts "Welcome to Silver room."
+
+		puts "Answer my question:"
+		puts "What is a class in Ruby?"
+
+		answer = $stdin.gets.chomp
+
+		code = "#{rand(0..9)}#{rand(0..9)}"
+
+		if answer == "a set of features"
+			puts "Exactly!"
+			return 'finished'
+		elsif  
+			puts "You have to guess the code"
+			puts "Type your input here: >>  "
+			input = $stdin.gets.chomp.to_i
+			if input == code
+				puts "Great!"
+				return 'finished'
+			else
+				puts "No"
+				return 'death'
+			end
+		else
+			puts "goodbye"
+			return 'death'
+		end
+				
 	end
 end
 
