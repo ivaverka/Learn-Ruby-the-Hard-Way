@@ -2,6 +2,8 @@
 
 ### Restaurants
 
+- Sicialia bakery makes the best canolli :cake :pizza
+
 ### Local Attractions
 
 ### remote Attractions
